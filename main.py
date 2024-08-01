@@ -95,10 +95,21 @@ city_counts = data['Location'].value_counts()
 
 # =============================================== Visualizing ===============================================
 
+# Antal båtar till salu per stad
 plt.figure(figsize=(12, 6))
 city_counts.plot(kind='bar')
 plt.title('Antal båtar till salu per stad')
 plt.xlabel('Stad')
 plt.ylabel('Antal båtar')
+plt.xticks(rotation=90)
+plt.show()
+
+# Genomsnittspris per stad
+avg_prices = data.groupby('Location')['Price'].mean().sort_values(ascending=False)
+plt.figure(figsize=(12, 6))
+avg_prices.plot(kind='bar')
+plt.title('Genomsnittspris per stad')
+plt.xlabel('Stad')
+plt.ylabel('Genomsnittspris')
 plt.xticks(rotation=90)
 plt.show()
