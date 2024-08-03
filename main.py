@@ -22,10 +22,21 @@ def get_ads_on_page(page_number):
     ads = soup.find_all('div', class_='styled__Wrapper-sc-1kpvi4z-0 iQpUlz')
     
     for ad in ads:
-        title = ad.find('span', class_='styled__SubjectContainer-sc-1kpvi4z-9 ekmXle').text.strip()
-        price = ad.find('div', class_='Price__StyledPrice-sc-1v2maoc-1 lbJRcp').text.strip()
-        location = ad.find('p', class_='styled__TopInfoWrapper-sc-1kpvi4z-22 cRXmkf').text.strip()
+        try:
+            title = ad.find('span', class_='styled__SubjectContainer-sc-1kpvi4z-9 ekmXle').text.strip()
+        except:
+            title = 'N/A'
         
+        try:
+            price = ad.find('div', class_='Price__StyledPrice-sc-1v2maoc-1 lbJRcp').text.strip()
+        except:
+            price = '0 kr'
+        
+        try:   
+            location = ad.find('p', class_='styled__TopInfoWrapper-sc-1kpvi4z-22 cRXmkf').text.strip()
+        except:
+            location = 'N/A'
+            
         # Check if the location contains the separator and split accordingly
         if '\xa0·\xa0' in location:
             location = location.split('\xa0·\xa0')[1].strip()
@@ -113,3 +124,4 @@ plt.xlabel('Stad')
 plt.ylabel('Genomsnittspris')
 plt.xticks(rotation=90)
 plt.show()
+
